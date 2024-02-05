@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+.grid .Logo{
+    font-size: 1.8rem;
+    color: red;
+    font-weight: bold;
+}
+.grid .links{
+    margin-left: 2%;
+}
+.grid .links .button{
+    text-decoration: none;
+}
+.grid .links .active .MuiButton-text, .search .active .MuiButton-text{
+    color: red;
+    font-weight: bold;
+}
+.grid .links .MuiButton-text, .search .MuiButton-text{
+    color: #fff;
+    font-size: 0.65rem;
+}
+.header{
+    z-index: 999;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.445);
+    width: 100%;
+}
+.header .container{
+    transition: 0.7s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+}
+.grid .links .button:hover{
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+}
+.MuiMenu-list{
+    background-color: #252525;
+    color: #fff;
+}
+.item_menu .avatar{
+    height: 80px;
+    width: 60px;
+    transition: all ease 0.4s;
+}
+.item_menu .avatar:hover{
+    transform: scale(1.1);
+    transition: all ease 0.4s;
+}
+.item_menu .grid_notification {
+    text-align: left;
+}
+.item_menu .grid_notification .title{
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    text-align: left;
+}
+.item_menu .grid_notification .name, .item_menu .grid_notification .release{
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: #d6d6d6;
+    text-align: left;
+}
+@media(max-width: 600px){
+    .header .container .grid .links,
+    .header .container .search .button{
+        display: none;
+    }
+    .header .container .grid{
+        justify-content: start;
+        align-items: center;
+    }
+    /* CSS responsável pelo toggle */
+    .box_toggle .grid_toggle .links_toggle .button{
+        text-decoration: none;
+        width: 100%;
+    }
+    .box_toggle .grid_toggle .links_toggle .button .MuiButton-text{
+        color: #fff;
+        font-size: 0.65rem;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 30%;
+        margin: 5% 0;
+    }
+    .box_toggle .grid_toggle .links_toggle .active .MuiButton-text{
+        color: red;
+        font-weight: bolder;
+    }
+    .box_toggle .grid_toggle .avatar_toggle{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 15%;
+        padding-left: 30%;
+        color: #fff;
+    }
+    .box_toggle .grid_toggle .avatar_toggle span{
+        font-size: 0.6rem;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        letter-spacing: 1.1px;
+        margin-top: 8%;
+    }
+}
+

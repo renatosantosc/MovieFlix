@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+.box ul{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    transition: 0.4s ease; 
+}
+.box span{
+    padding-left: 20px;
+}
+.box ul li .card{
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #030303;
+    transition: 0.4s ease;
+    animation-name: up;
+    animation-duration: 2s;
+}
+@keyframes up{
+    0%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.box ul li .card:hover{
+    transform: scale(1.1);
+    z-index: 10;
+}
+.box{
+    background-color: #030303;
+}
+.box ul::-webkit-scrollbar{
+    height: 5px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+.box ul::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
+.box ul:hover::-webkit-scrollbar-thumb{
+    background-color: red;
+}
+.box .button{
+    position: relative;
+    left: 0;
+    width: 98%;
+    height: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 11;
+}
+.box .button .buttons{
+    color: white;
+    background-color: #03030396;
+    height: 50px;
+}
+.box span{
+    color: white;
+    margin-left: 2%;
+    margin-top: 1%;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+.box ul li .card .play, .box ul li .card .play .link .MuiButton-contained, .box ul li .character{
+    display: none;
+}
+.box ul li .card:hover .play, .box ul li .card .play .link, .box ul li .card:hover .character{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.308);
+    border-radius: 6px;
+    transition: 0.4s ease;
+    text-decoration: none;
+}
+.box ul li .card:hover .play .link .MuiButton-contained{
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.534);
+    color: #fff;
+    transition: 0.4s ease;
+}
+.box ul li .cast_name{
+    font-size: 0.7rem;
+    color: rgb(223, 223, 223);
+    padding-left: 3%;
+}
+.box ul li .card .character .name{
+    font-weight: 300;
+    font-size: 0.7rem;
+    padding: 0;
+}
+.box ul li .card .character .character_name{
+    font-size: 0.5rem;
+    font-weight: 200;
+    padding: 0;
+}
+.box li{
+    display: flex;
+    flex-direction: column;
+}
