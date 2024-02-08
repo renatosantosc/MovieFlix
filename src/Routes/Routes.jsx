@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 import Home from '../Pages/Home'
 import Series from '../Pages/Series'
 import Film from '../Pages/Film'
@@ -7,7 +7,7 @@ import Search from '../Pages/Search'
 
 export default function MyRoutes(){
     return(
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path='/' element={ <Home /> } />
                 <Route path='/Séries' element={ <Series /> } />
@@ -15,6 +15,6 @@ export default function MyRoutes(){
                 <Route path='/Search' element={ <Search /> } />
                 <Route path='/:name/:id' element={ <ViewMovie /> } />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
