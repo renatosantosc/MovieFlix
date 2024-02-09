@@ -101,7 +101,7 @@ export default function Home(){
             {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
-            {dataMovie && back ? 
+            {dataMovie && discover && videoURL && foundVideo && back ? 
             <div className='title'>
               <div className='right'>
                 {dataMovie ?
@@ -144,15 +144,15 @@ export default function Home(){
                 <CircularProgress sx={{color: 'red'}} />
               </Box> }
         </Box>
-        {dataMovie ? 
+        {dataMovie && videoURL && foundVideo && back ? 
           <Slider movies={dataMovie.results} title='Filmes em alta' category={'movie'} />
         : '' }
 
-        {discover ? 
+        {discover && videoURL && foundVideo && back ? 
           <Slider movies={discover.results} title='Séries em alta' category={'tv'} />
         : '' }
         
-        {dataMovie && discover ? <Footer /> : ''} 
+        {dataMovie && discover && videoURL && foundVideo && back ? <Footer /> : ''} 
       </>    
     )
 }
