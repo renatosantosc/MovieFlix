@@ -56,11 +56,11 @@ export default function Slide_Movies(props){
                                         width >= 1040 && width < 1140 ? '11vw' :
                                         width >= 1140 && width < 1278 ? '10vw' : '9vw',
                                     height:
-                                        height >= 1000 && height < 1200 && width < 950 ? '16vh' :
-                                        height >= 1000 && height >= 1200 && width < 950 ? '14vh' :
+                                        height >= 1000 && height < 1200 && width < 950 ? '21vh' :
+                                        height >= 1200 && width < 950 ? '14vh' :
                                         height <= 1000 && height > 780 && width > 950 ? '22vh' :
                                         height <= 950 && height >= 805 && width < 450 ? '19vh' :
-                                        height < 805 && height >= 620 && width <= 450 ? '18vh' :
+                                        height < 805 && height >= 620 && width <= 450 ? '20vh' :
                                         height < 620 && width < 450 ? '22vh' : '28vh',
                                     backgroundImage: `url(${imageURL + item.poster_path})`,
                                     margin: '5px'

@@ -112,7 +112,7 @@ export default function Search(){
                                                         width >= 940 && width < 1040 ? '13vw' :
                                                         width >= 1040 && width < 1140 ? '12vw' :
                                                         width >= 1140 && width < 1278 ? '10vw' : '9vw',
-                                                    height: '29vh',
+                                                    height: width < 450 ?'22vh' : '29vh',
                                                     backgroundImage: `url(${imageURL + items.poster_path})`,
                                                     margin: '5px 1px',
                                                     backgroundSize: 'cover',
