@@ -18,6 +18,7 @@ export default function Header(){
     const [anchorEl, setAnchorEl] = useState(null) // State para abrir o modal do perfil
     const [anchorNot, setAnchorNot] = useState(null) // State para abrir o modal de notificação
     const [height, setHeight] = useState(null) // Captura o height da janela
+    const [heightWindow, setHeightWindow] = useState(window.screen.height)
     const [width, setWidth] = useState(window.innerWidth) // Captura o width da janela
     const [dataMovie, setDataMovie] = useState() // // Captura os dados dos filmes
     const [avatar, setAvatar] = useState() // Avatar do perfil
@@ -40,6 +41,7 @@ export default function Header(){
     const view_Height = () =>{
         setHeight(window.scrollY)
         setWidth(window.innerWidth)
+        setHeightWindow(window.screen.height)
     }
     setInterval(view_Height, 1000)
 
@@ -114,7 +116,12 @@ export default function Header(){
 
     return(
         <div className='header'>
-            <Grid className='container' container alignItems={'center'} width={'100%'} height={'10vh'} 
+            <Grid 
+            className='container' 
+            container 
+            alignItems={'center'} 
+            width={'100%'} 
+            height={heightWindow > 450 ? '10vh' : '20vh'} 
             sx={{
                 padding: '0px 20px',
                 backgroundColor: height > 0 ? 'black' : 'rgba(0, 0, 0, 0.445)'
