@@ -151,12 +151,6 @@
     .container .grid_view .left .certification{
         text-align: center;
     }
-    .container .grid_view .left .certification .age{
-        margin-left: 8%;
-    }
-    .container .grid_view .left .certification .time{
-        width: 25%;
-    }
 }
 
 @media(max-width: 860px) and (max-height: 1350px){
@@ -177,24 +171,21 @@
         margin: 0;
     }
     .container .grid_view .left .button_video .MuiButton-outlined, .container .grid_view .left .button_video .MuiButton-contained{
-        width: 35%;
+        width: 30%;
     }
     .container .grid_view .left .button_video{
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
-        height: 20%;
-        margin-bottom: 5%;
+        height: 5%;
+        margin-bottom: 2%;
         margin-top: 2%;
     }
     .container .grid_view .left .title{
         margin: 2% 0 0 0;
     }
-    .container .grid_view .left .certification .age{
-        margin-left: 2%;
-    }
-    .container .grid_view .left .certification .time{
-        width: 15%;
+    .container .grid_view .rigth{
+        background-position: top;
     }
 }
 
@@ -227,28 +218,17 @@
     .container .grid_view .left .title{
         margin: 2% 0 0 0;
     }
-    .container .grid_view .left .certification .age{
-        margin-left: 2%;
-    }
-    .container .grid_view .left .certification .time{
-        width: 15%;
-    }
 }
 @media(max-width: 450px){
     .container .grid_view .left{
         width: 100vw;
-    }
-    .container .grid_view .left .overview, 
-    .container .grid_view .left .title, 
-    .container .grid_view .left .button_video,
-    .container .grid_view .left .certification{
-        margin-right: 5%;
     }
     .container .grid_view .left .button_video{
         flex-direction: column;
         margin-top: 5%;
         justify-content: center;
         align-items: center;
+        height: 25%;
     }
     .container .grid_view .left .certification {
         margin-bottom: 3%;
@@ -257,16 +237,53 @@
         width: 80%;
         margin: 2% 0;
     }
-    .container .grid_view .left .certification .time{
-        padding-right: 5%;
-    }
     .container .grid_view .left .overview {
         height: 35%;
         overflow: scroll;
         display: flex;
         justify-content: center;
     }
-    .container .grid_view .left .certification{
-        align-items: flex-end;
+    .container .grid_view .left .certification .time{
+        padding: 0;
+    }
+}
+@media(max-height: 450px){
+    .container .grid_view{
+        height: 85vh;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        justify-content: center;
+        align-items: center;
+    }
+    .container .grid_view .rigth{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: top;
+        box-shadow: inset 10px -25px 20px black;
+    }
+    .container .grid_view .left{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    .container .grid_view .left .overview{
+        display: none;
+    }
+    .container .grid_view .left .button_video, .container .grid_view .left .certification{
+        margin-top: 10%;
+    }
+    .container .grid_view .left .button_video .MuiButton-outlined, 
+    .container .grid_view .left .button_video .MuiButton-contained{
+        width: 45%;
+        font-size: 0.7rem;
+    }
+    .container .grid_view .left .title{
+        font-size: 1.2rem;
+        margin-top: 10%;
     }
 }
