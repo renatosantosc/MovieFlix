@@ -6,7 +6,7 @@ import Header from '../Components/Header';
 import Modal from '../Components/Modal';
 import Slider from '../Components/Slides';
 import Footer from  '../Components/Footer'
-import { Box, Button, CircularProgress } from '@mui/material'
+import { Box, Button, CircularProgress, Grid } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import AddIcon from '@mui/icons-material/Add'
 import InfoIcon from '@mui/icons-material/Info'
@@ -27,6 +27,7 @@ export default function Serie(){
     const [idVideo, setIdVideo] = useState(null) // key do video (trailer)
     const [foundVideo, setFoundVideo] = useState({}) // Array de trailers
     const width = window.innerWidth
+    const height = window.screen.height
 
     const handleOpen = () =>{ setOpen(true) }
 
@@ -150,24 +151,32 @@ export default function Serie(){
     },[trendingTV, actionTV, animationTV, crimeTV, fantasyTV, videoURL, idVideo, foundVideo])
     return(
         <>
-        <Box className='body' width={'100vw'} height={'85vh'} sx={{backgroundImage: width > 450 ? `url(${back})` : `url(${alt})`}}>
+        <Box 
+        className='body' 
+        width={'100vw'} 
+        height={'85vh'} 
+        sx={{backgroundImage: width > 450 && height > 450 ? `url(${back})` : 
+                              width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {open ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
             {trendingTV && actionTV && animationTV && crimeTV && fantasyTV ? 
-            <div className='title'>
-              <div className='right'>
+            <Grid className='title'>
+              <Grid className='right'>
                 {trendingTV ?
-                  <div className='description'>  
-                    <h1>{trendingTV.results[0].name}</h1>
+                  <div className='description'>
+                    {height > 450 ? 
+                    <h1>{trendingTV.results[0].name}</h1> :
+                    <h3>{trendingTV.results[0].name}</h3>
+                    }
                     <p>{trendingTV.results[0].overview}</p>   
                   </div>
                 : ''}
 
                   <div className='button_footer'>
                     {videoURL && length > 0 ?
-                        <Button variant='outlined' onClick={handleOpen} startIcon={ <PlayArrowIcon sx={{paddingBottom: '3px'}} /> }>
+                        <Button variant='outlined' onClick={handleOpen} startIcon={ <PlayArrowIcon /> }>
                           Trailer
                         </Button>
                       : 
@@ -178,17 +187,17 @@ export default function Serie(){
                       </Link>
                     }
 
-                    <Button variant='contained' startIcon={ <AddIcon sx={{paddingBottom: '3px'}} /> } >
+                    <Button variant='contained' startIcon={ <AddIcon /> } >
                       Minha Lista
                     </Button>
                   </div>
-              </div>
+              </Grid>
 
-                <div className='left'>
+                <Grid className='left' sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
                   
-                </div>
+                </Grid>
 
-            </div>
+            </Grid>
             : <Box width='100vw' height='100vh' sx={{
                 backgroundColor: 'transparent',
                 display: 'flex',

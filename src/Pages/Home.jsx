@@ -7,7 +7,7 @@ import Header from '../Components/Header';
 import Modal from '../Components/Modal';
 import Slider from '../Components/Slides';
 import Footer from  '../Components/Footer';
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AddIcon from '@mui/icons-material/Add';
 import InfoIcon from '@mui/icons-material/Info';
@@ -25,6 +25,7 @@ export default function Home(){
   const [idVideo, setIdVideo] = useState(null) // key do video do trailer
   const [foundVideo, setFoundVideo] = useState({}) // State dos videos encontrados como trailer
   const width = window.innerWidth
+  const height = window.screen.height
 
   const handleOpen = () =>{ setOpen(true) }
 
@@ -96,17 +97,21 @@ export default function Home(){
         <Box className='body' 
             width={'100vw'} 
             height={'85vh'} 
-            sx={{backgroundImage: width > 450 ? `url(${back})` : `url(${alt})`}}>
+            sx={{backgroundImage: width > 450 && height > 450 ? `url(${back})` : 
+                                  width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
             {dataMovie && discover && videoURL && foundVideo && back ? 
-            <div className='title'>
-              <div className='right'>
+            <Grid container className='title'>
+              <Grid item className='right'>
                 {dataMovie ?
-                  <div className='description'>  
-                    <h1>{dataMovie.results[0].title}</h1>
+                  <div className='description'>
+                    {height > 450 ? 
+                    <h1>{dataMovie.results[0].title}</h1> :
+                    <h3>{dataMovie.results[0].title}</h3>
+                    }
                     <p>{dataMovie.results[0].overview}</p>   
                   </div>
                 : ''}
@@ -128,13 +133,13 @@ export default function Home(){
                       Minha Lista
                     </Button>
                   </div>
-              </div>
+              </Grid>
 
-                <div className='left'>
+                <Grid item className='left' sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
                   
-                </div>
+                </Grid>
 
-            </div>
+            </Grid>
             : <Box width='100vw' height='100vh' sx={{
                 backgroundColor: 'transparent',
                 display: 'flex',
