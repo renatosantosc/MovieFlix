@@ -10,10 +10,12 @@ export default function Search(){
     const [search, setSearch] = useState() // Valor do input
     const [resultSearch, setResultSearch] = useState() // Resultado da requisição
     const [width, setWidth] = useState() // State para capturar o tamanho da janela
+    const [heightWindow, setHeightWindow] = useState(window.screen.height)
     const imageURL = 'https://image.tmdb.org/t/p/original';
 
     const width_window = () =>{
         setWidth(window.innerWidth)
+        setHeightWindow(window.screen.height)
     }
     setInterval(width_window, 1000)
 
@@ -112,9 +114,12 @@ export default function Search(){
                                                         width >= 940 && width < 1040 ? '13vw' :
                                                         width >= 1040 && width < 1140 ? '12vw' :
                                                         width >= 1140 && width < 1278 ? '10vw' : '9vw',
-                                                    height: width < 450 ?'22vh' : '29vh',
+                                                    height: width < 450 ? '19vh' : 
+                                                            width >= 450 && heightWindow > 450 ?'29vh' : 
+                                                            heightWindow < 450 ? '55vh' : '40vh',
                                                     backgroundImage: `url(${imageURL + items.poster_path})`,
                                                     margin: '5px 1px',
+                                                    backgroundPosition: 'center',
                                                     backgroundSize: 'cover',
                                                     ':hover' : {
                                                         transform: 'scale(1.1)'
