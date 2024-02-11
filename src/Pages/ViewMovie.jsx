@@ -160,8 +160,7 @@ export default function ViewMovie(){
             <Box className='container'
             sx={{
                 width: '100vW',
-                color: '#fff',
-                padding: '0 10px'
+                color: '#fff'
             }}
             >
               
