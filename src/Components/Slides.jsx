@@ -61,7 +61,8 @@ export default function Slide_Movies(props){
                                         height <= 1000 && height > 780 && width > 950 ? '22vh' :
                                         height <= 950 && height >= 805 && width < 450 ? '19vh' :
                                         height < 805 && height >= 620 && width <= 450 ? '20vh' :
-                                        height < 620 && width < 450 ? '22vh' : '28vh',
+                                        height < 620 && width < 450 ? '22vh' : 
+                                        height < 450 ? '55vh' : '28vh',
                                     backgroundImage: `url(${imageURL + item.poster_path})`,
                                     margin: '5px'
                                 }}
@@ -101,7 +102,8 @@ export default function Slide_Movies(props){
                                                     height <= 1000 && height > 780 && width > 950 ? '22vh' :
                                                     height <= 950 && height >= 805 && width < 450 ? '19vh' :
                                                     height < 805 && height >= 620 && width <= 450 ? '18vh' :
-                                                    height < 620 && width < 450 ? '22vh' : '28vh',
+                                                    height < 620 && width < 450 ? '22vh' : 
+                                                    height < 450 ? '55vh' : '28vh',
                                                 backgroundImage: `url(${imageURL + items.profile_path})`,
                                                 margin: '5px'
                                             }}
