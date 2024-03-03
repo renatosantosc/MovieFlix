@@ -16,8 +16,15 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.270);
     box-shadow: 10px 10px 30px rgb(0, 0, 0);
+}
+.body .title .right{
+    display: grid;
+    grid-template-rows: 70% auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     animation-name: up;
-    animation-duration: 2s;
+    animation-duration: 2s; 
 }
 @keyframes up{
     0%{
@@ -26,13 +33,6 @@
     100%{
         transform: scale(1);
     }
-}
-.body .title .right{
-    display: grid;
-    grid-template-rows: 70% auto;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
 }
 .body .title .right .description{
     display: flex;
