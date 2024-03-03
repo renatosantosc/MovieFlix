@@ -23,8 +23,9 @@ export default function Modal_Video(props){
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                <iframe src={`https://www.youtube.com/embed/${props.id}?autoplay=1&mute=1`} 
-                title='Filme' width='80%' height={width < 450 ? '50%' : '80%'} />
+                <iframe src={`https://www.youtube.com/embed/${props.id}?autoplay=1&mute=1`}
+                allowFullScreen="allowFullScreen"
+                title='Filme' width='80%' height={width < 450 ? '50%' : '95%'} />
                 <Button variant='text' onClick={handleClose}
                 sx={{
                     color: '#fff',
