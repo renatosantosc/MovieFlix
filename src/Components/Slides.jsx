@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { useRef, useState, useEffect } from 'react'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 import './Styles/Slides.css'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Slide_Movies(props){
 
@@ -35,10 +37,11 @@ export default function Slide_Movies(props){
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                    <span>{props.title}</span>
+                    <span id='title'>{props.title}</span>
                     <ul ref={carousel}>
                 {props.movies ?
                     props.movies.map(item =>{
+                        const img = imageURL + item.poster_path
                         return(
                             <li key={item.id}>
                                 <Button className='card'
@@ -63,8 +66,7 @@ export default function Slide_Movies(props){
                                         height < 805 && height >= 620 && width <= 450 ? '20vh' :
                                         height < 620 && width < 450 ? '22vh' : 
                                         height < 450 ? '55vh' : '28vh',
-                                    backgroundImage: `url(${imageURL + item.poster_path})`,
-                                    margin: '5px'
+                                    padding: '0px'
                                 }}
                                 >
                                     <div className='play'>
@@ -74,6 +76,13 @@ export default function Slide_Movies(props){
                                             </Button>
                                         </Link>
                                     </div>
+                                    {/* <img src={`${img}`} loading='lazy' /> */}
+                                    <LazyLoadImage
+                                        src={img}
+                                        effect='blur'
+                                        width={'100%'}
+                                        height={'100%'}
+                                    />
                                 </Button>
                             </li>
                             )})
