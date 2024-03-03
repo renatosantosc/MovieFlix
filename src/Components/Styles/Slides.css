@@ -10,7 +10,7 @@
     scroll-behavior: smooth;
     transition: 0.4s ease; 
 }
-.box span{
+.box #title{
     padding-left: 20px;
 }
 .box ul li .card{
@@ -22,6 +22,10 @@
     transition: 0.4s ease;
     animation-name: up;
     animation-duration: 2s;
+    margin: 5px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
 }
 @keyframes up{
     0%{
@@ -31,9 +35,14 @@
         transform: scale(1);
     }
 }
-.box ul li .card:hover{
-    transform: scale(1.1);
-    z-index: 10;
+.box ul li .card img{
+    position: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .box{
     background-color: #030303;
@@ -82,9 +91,10 @@
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.308);
-    border-radius: 6px;
     transition: 0.4s ease;
     text-decoration: none;
+    z-index: 10;
+    position: absolute;
 }
 .box ul li .card:hover .play .link .MuiButton-contained{
     display: flex;
