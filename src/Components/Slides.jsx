@@ -76,7 +76,6 @@ export default function Slide_Movies(props){
                                             </Button>
                                         </Link>
                                     </div>
-                                    {/* <img src={`${img}`} loading='lazy' /> */}
                                     <LazyLoadImage
                                         src={img}
                                         effect='blur'
@@ -89,6 +88,7 @@ export default function Slide_Movies(props){
                             : '' }
                             {props.cast ?
                                 props.cast.map(items =>{
+                                    const img2 = imageURL + items.profile_path
                                     return(
                                         <li key={items.id}>
                                             <Button className='card'
@@ -113,8 +113,7 @@ export default function Slide_Movies(props){
                                                     height < 805 && height >= 620 && width <= 450 ? '18vh' :
                                                     height < 620 && width < 450 ? '22vh' : 
                                                     height < 450 ? '55vh' : '28vh',
-                                                backgroundImage: `url(${imageURL + items.profile_path})`,
-                                                margin: '5px'
+                                                padding: '0px'
                                             }}
                                             >
                                                 <div className='character'>
@@ -124,6 +123,12 @@ export default function Slide_Movies(props){
                                                         : items.roles[0].character}
                                                     </span>
                                                 </div>
+                                                <LazyLoadImage
+                                                    src={img2}
+                                                    effect='blur'
+                                                    width={'100%'}
+                                                    height={'100%'}
+                                                />
                                             </Button>
                                             <span className='cast_name'>{items.name}</span>
                                         </li>
