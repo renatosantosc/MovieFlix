@@ -271,6 +271,9 @@
         align-items: center;
         font-family: 'Roboto', sans-serif;
     }
+    .container .grid_view .left .certification {
+        margin-bottom: 2%;
+    }
     .container .grid_view .left .overview{
         display: none;
     }
@@ -283,7 +286,7 @@
         font-size: 0.7rem;
     }
     .container .grid_view .left .title{
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin-top: 10%;
     }
 }
