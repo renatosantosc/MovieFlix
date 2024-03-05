@@ -19,7 +19,7 @@
 }
 .body .title .right{
     display: grid;
-    grid-template-rows: 70% auto;
+    grid-template-rows: 80% auto;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -48,10 +48,9 @@
 }
 .body .title .right .button_footer{
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
     height: 100%;
-    margin-bottom: 15%;
 }
 .body .title .right .description p{
     font-size: 0.8rem;
