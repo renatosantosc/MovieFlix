@@ -133,9 +133,10 @@ export default function Header(){
                     height: '100%'
                 }}>
                     {width <= 600 ? <Toggle avatar={avatar} /> : ''}
-                    <Button className="Logo" variant='text'>
-                        M
-                    </Button>
+                    <NavLink to="/" className='link_logo'>
+                        <Button className="Logo" variant='text'>M</Button>
+                    </NavLink>
+                    
                     <div className='links'>
 
                         <NavLink to='/' className='button'>
