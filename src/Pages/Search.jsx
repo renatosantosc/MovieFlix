@@ -3,6 +3,7 @@ import { Box, Grid, TextField, Button } from '@mui/material'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 
 export default function Search(){
@@ -97,6 +98,7 @@ export default function Search(){
                     <Grid item width={'80%'} sx={{marginTop: '5%'}}>
                         <Grid container width={'100%'} >
                             {resultSearch && search.trim().length > 0 ? resultSearch.map(items =>{
+                                const img = imageURL + items.poster_path
                                 return(
                                     <Grid item xl={2} lg={2} md={3} xs={4} textAlign={'center'} key={items.id}>
                                         
@@ -117,16 +119,22 @@ export default function Search(){
                                                     height: width < 450 ? '19vh' : 
                                                             width >= 450 && heightWindow > 450 ?'29vh' : 
                                                             heightWindow < 450 ? '55vh' : '40vh',
-                                                    backgroundImage: `url(${imageURL + items.poster_path})`,
                                                     margin: '5px 1px',
+                                                    padding: '0px',
                                                     backgroundPosition: 'center',
                                                     backgroundSize: 'cover',
                                                     ':hover' : {
                                                         transform: 'scale(1.1)'
                                                     },
-                                                    transition: '0.4s ease'
+                                                    transition: '0.4s ease',
                                                 }}
                                             >
+                                                <LazyLoadImage
+                                                    src={img}
+                                                    effect='blur'
+                                                    width={'100%'}
+                                                    height={'100%'}
+                                                />
                                             </Button>
                                         </Link>
                                         
