@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-.grid .Logo{
+.grid .link_logo .MuiButton-text{
     font-size: 1.8rem;
     color: red;
     font-weight: bold;
@@ -7,7 +7,7 @@
 .grid .links{
     margin-left: 2%;
 }
-.grid .links .button{
+.grid .links .button, .grid .link_logo{
     text-decoration: none;
 }
 .grid .links .active .MuiButton-text, .search .active .MuiButton-text{
