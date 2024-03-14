@@ -168,7 +168,8 @@
         display: none;
     }
     .body .title .right .button_footer{
-        margin-bottom: 0;
+        margin-bottom: 7%;
+        align-items: end;
     }
 }
 @media(max-height: 450px){
