@@ -81,11 +81,17 @@ export default function Footer(){
                                     </IconButton>
                                 </Link>
 
-                            <Button variant='text'>
-                                <Link href='https://www.themoviedb.org/' underline='none' target='_blank' rel='noopener' sx={{color: '#d1d1d1'}}>
-                                    TMDB API
-                                </Link>
-                            </Button>
+                                <Button variant='text'>
+                                    <Link href='https://www.themoviedb.org/' underline='none' target='_blank' rel='noopener' sx={{color: '#d1d1d1'}}>
+                                        TMDB API
+                                    </Link>
+                                </Button>
+
+                                <Button variant='text'>
+                                    <Link href='https://www.icons8.com' underline='none' target='_blank' rel='noopener' sx={{color: '#d1d1d1'}}>
+                                        Icons 8
+                                    </Link>
+                                </Button>
                         </Grid>
 
                     </Grid>
