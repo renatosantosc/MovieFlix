@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+.box_found{
+    background: linear-gradient(110deg, red 0%, transparent 10%, transparent 40%, transparent 60%, transparent 90%, red 100%);
+}
+.box_found .logo_found, .box_found .not_found{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.box_found .MuiButton-contained:hover{
+    background-color: rgb(175, 175, 175);
+}
+
+@media (max-width: 800px){
+    .box_found .logo_found{
+        font-size: 5rem;
+    }
+    .box_found .not_found{
+        font-size: 1.3rem;
+    }
+    .box_found .MuiButton-contained{
+        width: 25%;
+    }
+}
+@media (max-width: 550px){
+    .box_found .logo_found{
+        font-size: 3.5rem;
+    }
+    .box_found .not_found{
+        font-size: 1.1rem;
+    }
+    .box_found .MuiButton-contained{
+        width: 30%;
+        margin-top: 15%;
+    }
+}
