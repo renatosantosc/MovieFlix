@@ -4,6 +4,7 @@ import Series from '../Pages/Series'
 import Film from '../Pages/Film'
 import ViewMovie from '../Pages/ViewMovie'
 import Search from '../Pages/Search'
+import NotFound from '../Pages/NotFound'
 
 export default function MyRoutes(){
     return(
@@ -14,6 +15,7 @@ export default function MyRoutes(){
                 <Route path='/Filmes' element={ <Film /> } />
                 <Route path='/Search' element={ <Search /> } />
                 <Route path='/:name/:id' element={ <ViewMovie /> } />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </HashRouter>
     )
