@@ -20,14 +20,14 @@ export default function Header(){
     const [height, setHeight] = useState(null) // Captura o height da janela
     const [heightWindow, setHeightWindow] = useState(window.screen.height)
     const [width, setWidth] = useState(window.innerWidth) // Captura o width da janela
-    const [dataMovie, setDataMovie] = useState() // // Captura os dados dos filmes
+    const [dataMovie, setDataMovie] = useState({}) // // Captura os dados dos filmes
     const [avatar, setAvatar] = useState() // Avatar do perfil
     const [avatar2, setAvatar2] = useState() // Avatar do filme e da série da notifiação
-    const [series, setSeries] = useState() // Captura os dados das séries
+    const [series, setSeries] = useState({}) // Captura os dados das séries
     const [resultSerie, setResultSerie] = useState({}) // Array de filmes
     const [resultMovie, setResultMovie] = useState({}) // Array de séries
     const [idSerie, setIdSerie] = useState() // Caputra o id da série
-    const [dataAir, setDataAir] = useState() // Data de lançamento da série
+    const [dataAir, setDataAir] = useState({}) // Data de lançamento da série
     const [transfDate, setTransfDate] = useState() // Data modificada
     const [transfDate2, setTransfDate2] = useState() // Data modificada
     const open = Boolean(anchorEl)
@@ -56,6 +56,24 @@ export default function Header(){
         }
         };
 
+        axios
+        .request(now_playing)
+        .then(function (response) {
+        setDataMovie(response.data)
+        setResultMovie(response.data.results[0])
+        setAvatar(imageURL + response.data.results[0].poster_path)
+        const date = response.data.results[0].release_date
+        const newDate = date.split('-').reverse().join('/')
+        setTransfDate2(newDate)
+        })
+        .catch(function (error) {
+        console.error(error);
+        });
+
+    },[])
+
+    useEffect(()=>{
+        const imageURL = 'https://image.tmdb.org/t/p/original';
         const trending_series = {
             method: 'GET',
             url: 'https://api.themoviedb.org/3/trending/tv/week?language=pt-BR',
@@ -64,55 +82,42 @@ export default function Header(){
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
             }
           };
-
-          const data_series = {
-            method: 'GET',
-            url: `https://api.themoviedb.org/3/tv/${idSerie}?language=pt-BR`,
-            headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-          };
-
-        axios
-        .request(now_playing)
-        .then(function (response) {
-        setDataMovie(response.data)
-        setResultMovie(dataMovie.results[0])
-        setAvatar(imageURL + dataMovie.results[0].poster_path)
-        const date = resultMovie.release_date
-        const newDate = date.split('-').reverse().join('/')
-        setTransfDate2(newDate)
-        })
-        .catch(function (error) {
-        console.error(error);
-        });
-
         axios
         .request(trending_series)
         .then(function (response) {
         setSeries(response.data)
-        setResultSerie(series.results[0])
-        setAvatar2(imageURL + series.results[0].poster_path)
-        setIdSerie(series.results[0].id)
+        setResultSerie(response.data.results[0])
+        setAvatar2(imageURL + response.data.results[0].poster_path)
+        setIdSerie(response.data.results[0].id)
+
+        if(idSerie){
+            const data_series = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/tv/${idSerie}?language=pt-BR`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+                }
+              };
+            axios
+            .request(data_series)
+            .then(function (response) {
+            setDataAir(response.data)
+            const date = response.data.last_air_date
+            const newDate = date.split('-').reverse().join('/')
+            setTransfDate(newDate)
+            })
+            .catch(function (error) {
+            console.error(error);
+            });
+        }
+
         })
         .catch(function (error) {
         console.error(error);
         });
 
-        axios
-        .request(data_series)
-        .then(function (response) {
-        setDataAir(response.data)
-        const date = dataAir.last_air_date
-        const newDate = date.split('-').reverse().join('/')
-        setTransfDate(newDate)
-        })
-        .catch(function (error) {
-        console.error(error);
-        });
-
-    },[dataMovie, series, dataAir, idSerie, resultMovie])
+    },[idSerie])
 
     return(
         <div className='header'>

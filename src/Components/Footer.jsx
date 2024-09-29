@@ -25,7 +25,7 @@ export default function Footer(){
                 backgroundColor: 'transparent',
                 color: '#fff'
             }}>
-                <Grid container xl={12} lg={12} md={12} xs={12} alignItems={'center'} className='grid_container_footer'>
+                <Grid container xl={12} alignItems={'center'} className='grid_container_footer'>
                     <Grid item xl={4} lg={4} md={4} xs={width > 450 ? 3 : 4} className='grid_logo'
                     sx={{textAlign: 'center'}}>
 
@@ -68,7 +68,7 @@ export default function Footer(){
                     <Grid item container xl={4} lg={4} md={4} xs={width > 450 ? 3 : 4} className='grid_social'
                         justifyContent={'space-evenly'} 
                         alignItems={'center'} 
-                        direction={'column'}>
+                        flexDirection={'column'}>
 
                         <Grid item className='grid_span'>
                             <span>Social e Links</span>

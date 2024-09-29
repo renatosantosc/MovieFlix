@@ -92,11 +92,11 @@ export default function ViewMovie(){
         .request(movie)
         .then(function (response) {
         setDateMovie(response.data)
-        const movieRelease = new Date(name === 'movie' ? dateMovie.release_date : dateMovie.seasons[0].air_date)
+        const movieRelease = new Date(name === 'movie' ? response.data.release_date : response.data.seasons[0].air_date)
         const ano = movieRelease.getFullYear()
         setRelease(ano)
-        const hrs = Math.floor(dateMovie.runtime / 60)
-        const min = dateMovie.runtime % 60
+        const hrs = Math.floor(response.data.runtime / 60)
+        const min = response.data.runtime % 60
         setHours((`${hrs}`).slice(-2))
         setMinute((`${min}`).slice(-2))
         })
@@ -108,8 +108,8 @@ export default function ViewMovie(){
         .request(video)
         .then(function (response) {
             setKey(response.data)
-            setLength(key.results.length)
-            setFoundVideo(key.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
+            setLength(response.data.results.length)
+            setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
         })
         .catch(function (error) {
         console.error(error);
@@ -119,7 +119,7 @@ export default function ViewMovie(){
         .request(release_movie)
         .then(function (response) {
         setReleaseMovie(response.data.results)
-        setFound(releaseMovie.find((item) => item.iso_3166_1 === 'BR'))
+        setFound(response.data.results.find((item) => item.iso_3166_1 === 'BR'))
         })
         .catch(function (error) {
         console.error(error);
@@ -129,19 +129,20 @@ export default function ViewMovie(){
         .request(credits_movie)
         .then(function (response) {
           setCastMovie(response.data.cast)
-          setNewCastMovie(castMovie.slice(0, 20))
+          setNewCastMovie(response.data.cast.slice(0, 20))
         })
         .catch(function (error) {
-        console.error(error);
+        console.error("ERROR");
         });
+
         axios
         .request(credits_series)
         .then(function (response) {
           setCastSeries(response.data.cast)
-          setNewCastSeries(castSeries.slice(0, 20))
+          setNewCastSeries(response.data.cast.slice(0, 20))
         })
         .catch(function (error) {
-        console.error(error);
+          console.error("ERROR");
         });
 
         axios
@@ -154,7 +155,7 @@ export default function ViewMovie(){
         console.error(error);
         });
 
-      },[id, name, found, releaseMovie, dateMovie, castMovie, castSeries, recommendations, length, key, foundVideo])
+      },[reload === id])
     return(
         <>
             <Box className='container'
@@ -165,7 +166,7 @@ export default function ViewMovie(){
             >
               
               <Header />
-              {dateMovie && release && recommendations && reload === id ? 
+              {dateMovie && recommendations && reload === id ? 
                 <Grid container className='grid_view'>
                   <Grid item className='left'>
                     <div className='certification'>

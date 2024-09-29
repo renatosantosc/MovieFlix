@@ -16,6 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 export default function Home(){
 
   const [dataMovie, setDataMovie] = useState() // State dos filmes
+  const [dataMovie0, setDataMovie0] = useState({})
   const [discover, setDiscover] = useState() // State das séries
   const [back, setBack] = useState() // State da imagem do background
   const [alt, setAlt] = useState() // State da imagem do background alternativo para dispositivos móveis
@@ -39,58 +40,63 @@ export default function Home(){
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
       }
     };
-
-    const discover_movie = {
-      method: 'GET',
-      url: 'https://api.themoviedb.org/3/trending/tv/week?language=pt-BR',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-      }
-    };
-
-    const video = {
-      method: 'GET',
-      url: `https://api.themoviedb.org/3/movie/${idVideo}/videos?language=pt-BR&page=1`,
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-      }
-    };
-
     axios
     .request(options)
     .then(function (response) {
-      setDataMovie(response.data)
-      setBack(imageURL + dataMovie.results[0].backdrop_path)
-      setAlt(imageURL + dataMovie.results[0].poster_path)
-      setIdVideo(dataMovie.results[0].id)
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+      setDataMovie(response.data.results)
+      setDataMovie0(response.data.results[0])
+      setBack(imageURL + response.data.results[0].backdrop_path)
+      setAlt(imageURL + response.data.results[0].poster_path)
+      setIdVideo(response.data.results[0].id)
 
-    axios
-    .request(video)
-    .then(function (response) {
-      setVideoURL(response.data)
-      setLength(videoURL.results.length)
-      setFoundVideo(videoURL.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+      if(idVideo){
+        const video = {
+          method: 'GET',
+          url: `https://api.themoviedb.org/3/movie/${idVideo}/videos?language=pt-BR&page=1`,
+          headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+          }
+        };
+
+        axios
+        .request(video)
+        .then(function (response) {
+          setVideoURL(response.data.results)
+          setLength(response.data.results.length)
+          setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+      }
+
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+
+  },[idVideo])
+
+  useEffect(()=>{
+  const discover_movie = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/trending/tv/week?language=pt-BR',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+      };
 
     axios
     .request(discover_movie)
     .then(function (response) {
-      setDiscover(response.data)
+      setDiscover(response.data.results)
     })
     .catch(function (error) {
       console.error(error);
     });
-
-  },[dataMovie, discover, videoURL, idVideo, foundVideo])
+  },[])
 
     return(
       <>
@@ -103,16 +109,16 @@ export default function Home(){
             {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
-            {dataMovie && discover && videoURL && foundVideo && back ? 
+          {dataMovie && discover && videoURL && foundVideo && back ? 
             <Grid container className='title'>
               <Grid item className='right'>
                 {dataMovie ?
                   <div className='description'>
                     {height > 450 ? 
-                    <h1>{dataMovie.results[0].title}</h1> :
-                    <h3>{dataMovie.results[0].title}</h3>
+                    <h1>{dataMovie0.title}</h1> :
+                    <h3>{dataMovie0.title}</h3>
                     }
-                    <p>{dataMovie.results[0].overview}</p>   
+                    <p>{dataMovie0.overview}</p>   
                   </div>
                 : ''}
 
@@ -122,7 +128,7 @@ export default function Home(){
                         Trailer
                       </Button>
                     :
-                      <Link to={`/movie/${dataMovie.results[0].id}`} className='link'>
+                      <Link to={`/movie/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                             Detalhes
                         </Button>
@@ -140,24 +146,24 @@ export default function Home(){
                 </Grid>
 
             </Grid>
-            : <Box width='100vw' height='100vh' sx={{
+          : <Box width='100vw' height='100vh' sx={{
                 backgroundColor: 'transparent',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
                 <CircularProgress sx={{color: 'red'}} />
-              </Box> }
-        </Box>
+          </Box> }
+        </Box> 
         {dataMovie && videoURL && foundVideo && back ? 
-          <Slider movies={dataMovie.results} title='Filmes em alta' category={'movie'} />
+          <Slider movies={dataMovie} title='Filmes em alta' category={'movie'} />
         : '' }
 
         {discover && videoURL && foundVideo && back ? 
-          <Slider movies={discover.results} title='Séries em alta' category={'tv'} />
+          <Slider movies={discover} title='Séries em alta' category={'tv'} />
         : '' }
         
         {dataMovie && discover && videoURL && foundVideo && back ? <Footer /> : ''} 
       </>    
     )
-}
+  }

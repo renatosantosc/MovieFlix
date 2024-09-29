@@ -14,6 +14,7 @@ import InfoIcon from '@mui/icons-material/Info';
 export default function Film(){
 
     const [nowPlaying, setNowPlaying] = useState() // Filmes em lançamento
+    const [dataMovie0, setDataMovie0] = useState({})
     const [actionMovie, setActionMovie] = useState() // Filmes de ação
     const [romanceMovie, setRomanceMovie] = useState() // Filmes de romance
     const [terrorMovie, setTerrorMovie] = useState() // Filmes de terror
@@ -42,79 +43,85 @@ export default function Film(){
             }
           };
 
-        const romance = {
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10749&with_original_language=en',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-          }
-        };
-
-        const action = {
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=28%2C12&with_original_language=en',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-          }
-        };
-
-        const terror ={
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=27&with_original_language=en',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-          }
-        };
-
-        const fiction ={
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=878&with_original_language=en',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-          }
-        };
-
-        const video = {
-          method: 'GET',
-          url: `https://api.themoviedb.org/3/movie/${idVideo}/videos?language=pt-BR&page=1`,
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-          }
-      };
-
         axios
         .request(now_playing)
         .then(function (response) {
-        setNowPlaying(response.data)
-        setBack(imageURL + nowPlaying.results[0].backdrop_path)
-        setAlt(imageURL + nowPlaying.results[0].poster_path)
-        setIdVideo(nowPlaying.results[0].id)
+        setNowPlaying(response.data.results)
+        setDataMovie0(response.data.results[0])
+        setBack(imageURL + dataMovie0.backdrop_path)
+        setAlt(imageURL + dataMovie0.poster_path)
+        setIdVideo(dataMovie0.id)
+
+        if(idVideo){
+          const video = {
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${idVideo}/videos?language=pt-BR&page=1`,
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+            }
+          };
+          axios
+          .request(video)
+          .then(function (response) {
+            setVideoURL(response.data)
+            setLength(response.data.results.length)
+            setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        }
+
         })
         .catch(function (error) {
         console.error(error);
         });
 
-        axios
-        .request(video)
-        .then(function (response) {
-          setVideoURL(response.data)
-          setLength(videoURL.results.length)
-          setFoundVideo(videoURL.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+    },[idVideo, back, alt])
 
+    useEffect(()=>{
 
-        axios
+      const romance = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10749&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+      };
+
+      const action = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=28%2C12&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+      };
+
+      const terror ={
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=27&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+      };
+
+      const fiction ={
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=878&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+      };
+
+      axios
         .request(action)
         .then(function (response) {
-        setActionMovie(response.data)
+        setActionMovie(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -123,7 +130,7 @@ export default function Film(){
         axios
         .request(romance)
         .then(function (response) {
-        setRomanceMovie(response.data)
+        setRomanceMovie(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -132,7 +139,7 @@ export default function Film(){
         axios
         .request(terror)
         .then(function (response) {
-        setTerrorMovie(response.data)
+        setTerrorMovie(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -141,13 +148,12 @@ export default function Film(){
         axios
         .request(fiction)
         .then(function (response) {
-          setFictionMovie(response.data)
+          setFictionMovie(response.data.results)
         })
         .catch(function (error) {
           console.error(error);
         });
-
-    },[nowPlaying, actionMovie, romanceMovie, terrorMovie, fictionMovie, videoURL, idVideo, foundVideo])
+    },[])
 
     return(
         <>
@@ -167,10 +173,10 @@ export default function Film(){
                 {nowPlaying ?
                   <div className='description'>
                     {height > 450 ?
-                    <h1>{nowPlaying.results[0].title}</h1> : 
-                    <h3>{nowPlaying.results[0].title}</h3>
+                    <h1>{dataMovie0.title}</h1> : 
+                    <h3>{dataMovie0.title}</h3>
                     }
-                    <p>{nowPlaying.results[0].overview}</p>   
+                    <p>{dataMovie0.overview}</p>   
                   </div>
                 : ''}
 
@@ -180,7 +186,7 @@ export default function Film(){
                             Trailer
                         </Button>
                     : 
-                        <Link to={`/movie/${nowPlaying.results[0].id}`} className='link'>
+                        <Link to={`/movie/${dataMovie0.id}`} className='link'>
                           <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                               Detalhes
                           </Button>
@@ -208,23 +214,23 @@ export default function Film(){
               </Box> }
         </Box>
         {nowPlaying ? 
-          <Slider movies={nowPlaying.results} title='Lançamentos' category={'movie'} />
+          <Slider movies={nowPlaying} title='Lançamentos' category={'movie'} />
         : '' }
 
         {actionMovie ? 
-          <Slider movies={actionMovie.results} title='Filmes de ação e aventura' category={'movie'} />
+          <Slider movies={actionMovie} title='Filmes de ação e aventura' category={'movie'} />
         : '' }
 
         {romanceMovie ? 
-          <Slider movies={romanceMovie.results} title='Filmes de romance' category={'movie'} />
+          <Slider movies={romanceMovie} title='Filmes de romance' category={'movie'} />
         : '' }
 
         {terrorMovie ? 
-          <Slider movies={terrorMovie.results} title='Filmes de terror' category={'movie'} />
+          <Slider movies={terrorMovie} title='Filmes de terror' category={'movie'} />
         : '' }
 
         {fictionMovie ? 
-          <Slider movies={fictionMovie.results} title='Filmes de ficção científicas' category={'movie'} />
+          <Slider movies={fictionMovie} title='Filmes de ficção científicas' category={'movie'} />
         : '' }
         
         {nowPlaying && actionMovie && romanceMovie && terrorMovie && fictionMovie ? <Footer /> : ''} 

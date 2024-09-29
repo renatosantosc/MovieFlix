@@ -15,6 +15,7 @@ import InfoIcon from '@mui/icons-material/Info'
 export default function Serie(){
 
     const [trendingTV, setTrendingTV] = useState() // Dados dos filmes em tedências
+    const [dataMovie0, setDataMovie0] = useState({})
     const [actionTV, setActionTV] = useState() // Dados dos filmes de ação
     const [animationTV, setAnimationTV] = useState() // Dados dos filmes em animação
     const [crimeTV, setCrimeTV] = useState() // Dados dos filmes de crime
@@ -35,87 +36,93 @@ export default function Serie(){
         const imageURL = 'https://image.tmdb.org/t/p/original';
 
         const trending = {
-            method: 'GET',
-            url: 'https://api.themoviedb.org/3/trending/tv/week?language=pt-BR',
-            headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-          };
-
-        const animation = {
-            method: 'GET',
-            url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=16&with_original_language=en',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-        };
-
-        const action = {
-            method: 'GET',
-            url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10759&with_original_language=en',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-        };
-
-        const crime ={
-            method: 'GET',
-            url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=80&with_original_language=en',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-        };
-
-        const fantasy ={
-            method: 'GET',
-            url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10765&with_original_language=en',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
-            }
-        };
-
-        const video = {
           method: 'GET',
-          url: `https://api.themoviedb.org/3/tv/${idVideo}/videos?language=pt-BR&page=1`,
+          url: 'https://api.themoviedb.org/3/trending/tv/week?language=pt-BR',
           headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
           }
-      };
-
+        };
+  
         axios
         .request(trending)
         .then(function (response) {
-        setTrendingTV(response.data)
-        setBack(imageURL + trendingTV.results[0].backdrop_path)
-        setAlt(imageURL + trendingTV.results[0].poster_path)
-        setIdVideo(trendingTV.results[0].id)
+        setTrendingTV(response.data.results)
+        setDataMovie0(response.data.results[0])
+        setBack(imageURL + response.data.results[0].backdrop_path)
+        setAlt(imageURL + response.data.results[0].poster_path)
+        setIdVideo(response.data.results[0].id)
+
+        if(idVideo){
+          const video = {
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/tv/${idVideo}/videos?language=pt-BR&page=1`,
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+            }
+          };
+
+          axios
+          .request(video)
+          .then(function (response) {
+            setVideoURL(response.data.results)
+            setLength(response.data.length)
+            setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+        }
         })
         .catch(function (error) {
         console.error(error);
         });
 
-        axios
-        .request(video)
-        .then(function (response) {
-          setVideoURL(response.data)
-          setLength(videoURL.results.length)
-          setFoundVideo(videoURL.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+    },[idVideo])
 
+    useEffect(()=>{
 
-        axios
+    const animation = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=16&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+    };
+
+    const action = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10759&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+    };
+
+    const crime ={
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=80&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+    };
+
+    const fantasy ={
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=10765&with_original_language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNGNhMDkwOTYyYjlkY2YxZjYyNzhjNjQ3YWI1YzhmNSIsInN1YiI6IjY1MzdlZmUxNDFhYWM0MDBhYTA4MTIzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T0YHaxg5E2HUn_wnrvxue_wwmqslufrrwZOJ10jgcjo'
+        }
+    };
+
+    axios
         .request(action)
         .then(function (response) {
-        setActionTV(response.data)
+        setActionTV(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -124,7 +131,7 @@ export default function Serie(){
         axios
         .request(animation)
         .then(function (response) {
-        setAnimationTV(response.data)
+        setAnimationTV(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -133,7 +140,7 @@ export default function Serie(){
         axios
         .request(crime)
         .then(function (response) {
-        setCrimeTV(response.data)
+        setCrimeTV(response.data.results)
         })
         .catch(function (error) {
         console.error(error);
@@ -142,13 +149,14 @@ export default function Serie(){
         axios
         .request(fantasy)
         .then(function (response) {
-          setFantasyTV(response.data)
+          setFantasyTV(response.data.results)
         })
         .catch(function (error) {
           console.error(error);
         });
+    },[])
 
-    },[trendingTV, actionTV, animationTV, crimeTV, fantasyTV, videoURL, idVideo, foundVideo])
+
     return(
         <>
         <Box 
@@ -167,10 +175,10 @@ export default function Serie(){
                 {trendingTV ?
                   <div className='description'>
                     {height > 450 ? 
-                    <h1>{trendingTV.results[0].name}</h1> :
-                    <h3>{trendingTV.results[0].name}</h3>
+                    <h1>{dataMovie0.name}</h1> :
+                    <h3>{dataMovie0.name}</h3>
                     }
-                    <p>{trendingTV.results[0].overview}</p>   
+                    <p>{dataMovie0.overview}</p>   
                   </div>
                 : ''}
 
@@ -180,7 +188,7 @@ export default function Serie(){
                           Trailer
                         </Button>
                       : 
-                      <Link to={`/tv/${trendingTV.results[0].id}`} className='link'>
+                      <Link to={`/tv/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                             Detalhes
                         </Button>
@@ -208,23 +216,23 @@ export default function Serie(){
               </Box> }
         </Box>
         {trendingTV ? 
-          <Slider movies={trendingTV.results} title='Tendências da semana' category={'tv'} />
+          <Slider movies={trendingTV} title='Tendências da semana' category={'tv'} />
         : '' }
 
         {actionTV ? 
-          <Slider movies={actionTV.results} title='Séries de ação e aventura' category={'tv'} />
+          <Slider movies={actionTV} title='Séries de ação e aventura' category={'tv'} />
         : '' }
 
         {animationTV ? 
-          <Slider movies={animationTV.results} title='Animação' category={'tv'} />
+          <Slider movies={animationTV} title='Animação' category={'tv'} />
         : '' }
 
         {crimeTV ? 
-          <Slider movies={crimeTV.results} title='Séries de crime' category={'tv'} />
+          <Slider movies={crimeTV} title='Séries de crime' category={'tv'} />
         : '' }
 
         {fantasyTV ? 
-          <Slider movies={fantasyTV.results} title='Séries de ficção científica e fantasia' category={'tv'} />
+          <Slider movies={fantasyTV} title='Séries de ficção científica e fantasia' category={'tv'} />
         : '' }
         
         {trendingTV && actionTV && animationTV && crimeTV && fantasyTV ? <Footer /> : ''} 
