@@ -56,14 +56,14 @@ export default function Search(){
                     justifyContent={'center'}
                     alignItems={'center'}
                     sx={{
-                        marginTop: 
-                            width < 450 ? '25%' :
-                            width >= 450 && width < 520 ? '19%' : 
-                            width >= 520 && width < 601 ? '16%' : 
-                            width >= 601 && width < 720 ? '12%' : '9%',
+                        marginTop: '100px',
+                            // width < 450 ? '25%' :
+                            // width >= 450 && width < 520 ? '19%' : 
+                            // width >= 520 && width < 601 ? '16%' : 
+                            // width >= 601 && width < 720 ? '12%' : '9%',
                         color: '#fff'}}
                 >
-                    <Grid item width={width <= 600 ? '80%' : '50%'} >
+                    <Grid item width={'80%'} >
                         <TextField 
                             type='text'
                             variant='outlined'
@@ -106,19 +106,24 @@ export default function Search(){
                                             <Button
                                                 sx={{
                                                     width: 
-                                                        width < 520 ? '25vw' :
-                                                        width >= 520 && width < 540 ? '23vw' :
-                                                        width >= 540 && width < 600 ? '21vw' :
-                                                        width >= 600 && width < 690 ? '19vw' :
-                                                        width >= 690 && width < 770 ? '17vw' :
-                                                        width >= 770 && width < 840 ? '16vw' :
-                                                        width >= 840 && width < 940 ? '14vw' : 
-                                                        width >= 940 && width < 1040 ? '13vw' :
-                                                        width >= 1040 && width < 1140 ? '12vw' :
-                                                        width >= 1140 && width < 1278 ? '10vw' : '9vw',
-                                                    height: width < 450 ? '19vh' : 
-                                                            width >= 450 && heightWindow > 450 ?'29vh' : 
-                                                            heightWindow < 450 ? '55vh' : '40vh',
+                                                        width < 500 ? '90px' :
+                                                        heightWindow < 500  ? '90px' : '150px',
+                                                        // width < 520 ? '25vw' :
+                                                        // width >= 520 && width < 540 ? '23vw' :
+                                                        // width >= 540 && width < 600 ? '21vw' :
+                                                        // width >= 600 && width < 690 ? '19vw' :
+                                                        // width >= 690 && width < 770 ? '17vw' :
+                                                        // width >= 770 && width < 840 ? '16vw' :
+                                                        // width >= 840 && width < 940 ? '14vw' : 
+                                                        // width >= 940 && width < 1040 ? '13vw' :
+                                                        // width >= 1040 && width < 1140 ? '12vw' :
+                                                        // width >= 1140 && width < 1278 ? '10vw' : '9vw',
+                                                    height: 
+                                                            heightWindow < 500 ? '140px' : 
+                                                            width < 500 ? '140px' : '250px',
+                                                            // width < 450 ? '19vh' : 
+                                                            // width >= 450 && heightWindow > 450 ?'29vh' : 
+                                                            // heightWindow < 450 ? '55vh' : '40vh',
                                                     margin: '5px 1px',
                                                     padding: '0px',
                                                     backgroundPosition: 'center',

@@ -47,25 +47,25 @@ export default function Slide_Movies(props){
                                 <Button className='card'
                                 sx={{
                                     width: 
-                                        width < 420 ? '27vw' :
-                                        width >= 420 && width < 520  ? '25vw' :
-                                        width >= 520 && width < 540 ? '23vw' :
-                                        width >= 540 && width < 600 ? '21vw' :
-                                        width >= 600 && width < 690 ? '19vw' :
-                                        width >= 690 && width < 770 ? '17vw' :
-                                        width >= 770 && width < 840 ? '15vw' :
-                                        width >= 840 && width < 940 ? '13vw' : 
-                                        width >= 940 && width < 1040 ? '12vw' :
-                                        width >= 1040 && width < 1140 ? '11vw' :
-                                        width >= 1140 && width < 1278 ? '10vw' : '9vw',
+                                        width < 500 ? '110px' :
+                                        height < 500  ? '90px' : '150px',
+                                        // width >= 520 && width < 540 ? '23vw' :
+                                        // width >= 540 && width < 600 ? '21vw' :
+                                        // width >= 600 && width < 690 ? '19vw' :
+                                        // width >= 690 && width < 770 ? '17vw' :
+                                        // width >= 770 && width < 840 ? '15vw' :
+                                        // width >= 840 && width < 940 ? '13vw' : 
+                                        // width >= 940 && width < 1040 ? '12vw' :
+                                        // width >= 1040 && width < 1140 ? '11vw' :
+                                        // width >= 1140 ? '10vw' : '9vw',
                                     height:
-                                        height >= 1000 && height < 1200 && width < 950 ? '21vh' :
-                                        height >= 1200 && width < 950 ? '14vh' :
-                                        height <= 1000 && height > 780 && width > 950 ? '22vh' :
-                                        height <= 950 && height >= 805 && width < 450 ? '19vh' :
-                                        height < 805 && height >= 620 && width <= 450 ? '20vh' :
-                                        height < 620 && width < 450 ? '22vh' : 
-                                        height < 450 ? '55vh' : '28vh',
+                                        // height >= 1000 && height < 1200 && width < 950 ? '21vh' :
+                                        // height >= 1200 && width < 950 ? '14vh' :
+                                        // height <= 1000 && height > 780 && width > 950 ? '22vh' :
+                                        // height <= 950 && height >= 805 && width < 450 ? '19vh' :
+                                        // height < 805 && height >= 620 && width <= 450 ? '20vh' :
+                                        height < 500 ? '140px' : 
+                                        width < 500 ? '175px' : '250px',
                                     padding: '0px'
                                 }}
                                 >
@@ -94,25 +94,29 @@ export default function Slide_Movies(props){
                                             <Button className='card'
                                             sx={{
                                                 width:
-                                                    width < 420 ? '27vw' :
-                                                    width >= 420 && width < 520  ? '25vw' :
-                                                    width >= 520 && width < 540 ? '23vw' :
-                                                    width >= 540 && width < 600 ? '21vw' :
-                                                    width >= 600 && width < 690 ? '19vw' :
-                                                    width >= 690 && width < 770 ? '17vw' :
-                                                    width >= 770 && width < 840 ? '15vw' :
-                                                    width >= 840 && width < 940 ? '13vw' : 
-                                                    width >= 940 && width < 1040 ? '12vw' :
-                                                    width >= 1040 && width < 1140 ? '11vw' :
-                                                    width >= 1140 && width < 1278 ? '10vw' : '9vw',
-                                                height: 
-                                                    height >= 1000 && height < 1200 && width < 950 ? '16vh' :
-                                                    height >= 1000 && height >= 1200 && width < 950 ? '14vh' :
-                                                    height <= 1000 && height > 780 && width > 950 ? '22vh' :
-                                                    height <= 950 && height >= 805 && width < 450 ? '19vh' :
-                                                    height < 805 && height >= 620 && width <= 450 ? '18vh' :
-                                                    height < 620 && width < 450 ? '22vh' : 
-                                                    height < 450 ? '55vh' : '28vh',
+                                                    width < 500 ? '110px' :
+                                                    height < 500  ? '90px' : '150px',
+                                                    // width < 420 ? '27vw' :
+                                                    // width >= 420 && width < 520  ? '25vw' :
+                                                    // width >= 520 && width < 540 ? '23vw' :
+                                                    // width >= 540 && width < 600 ? '21vw' :
+                                                    // width >= 600 && width < 690 ? '19vw' :
+                                                    // width >= 690 && width < 770 ? '17vw' :
+                                                    // width >= 770 && width < 840 ? '15vw' :
+                                                    // width >= 840 && width < 940 ? '13vw' : 
+                                                    // width >= 940 && width < 1040 ? '12vw' :
+                                                    // width >= 1040 && width < 1140 ? '11vw' :
+                                                    // width >= 1140 && width < 1278 ? '10vw' : '9vw',
+                                                height:
+                                                        height < 500 ? '140px' : 
+                                                        width < 500 ? '175px' : '250px',
+                                                    // height >= 1000 && height < 1200 && width < 950 ? '16vh' :
+                                                    // height >= 1000 && height >= 1200 && width < 950 ? '14vh' :
+                                                    // height <= 1000 && height > 780 && width > 950 ? '22vh' :
+                                                    // height <= 950 && height >= 805 && width < 450 ? '19vh' :
+                                                    // height < 805 && height >= 620 && width <= 450 ? '18vh' :
+                                                    // height < 620 && width < 450 ? '22vh' : 
+                                                    // height < 450 ? '55vh' : '28vh',
                                                 padding: '0px'
                                             }}
                                             >
@@ -137,7 +141,7 @@ export default function Slide_Movies(props){
                     </ul>
                     {arrow && width > 450 ?
                         <Box className='button' 
-                        sx={{top: '-140px'}}>
+                        sx={{top: '-180px'}}>
                             <IconButton className='buttons' size='large' onClick={handleLeft}>
                                 <KeyboardArrowLeft fontSize='inherit' />
                             </IconButton>
