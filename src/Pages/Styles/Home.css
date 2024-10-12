@@ -206,3 +206,8 @@
         animation-duration: 2s;
     }
 }
+@media(max-height: 500px){
+    .body .title .right .description h3{
+        font-size: 1.4rem;
+    }
+}
