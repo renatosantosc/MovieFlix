@@ -104,7 +104,7 @@ export default function Home(){
             width={'100vw'} 
             height={'85vh'} 
             sx={{backgroundImage: width > 450 && height > 450 ? `url(${back})` : 
-                                  width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
+                                  width > 450 && height < 500 ? 'none' : `url(${alt})`}}>
             <Header />
             {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
@@ -141,7 +141,7 @@ export default function Home(){
                   </div>
               </Grid>
 
-                <Grid item className='left' sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
+                <Grid item className='left' sx={{backgroundImage: height < 500 ? `url(${back})` : 'none'}}>
                   
                 </Grid>
 
