@@ -27,6 +27,7 @@ export default function Film(){
     const [idVideo, setIdVideo] = useState(null) // key do trailer
     const [foundVideo, setFoundVideo] = useState({}) // State do video encontrado como trailer
     const [backVideo, setBackVideo] = useState(false)
+    const [checkWindow, setCheckWindow] = useState()
     const width = window.innerWidth
     const height = window.screen.height
 
@@ -156,9 +157,11 @@ export default function Film(){
         });
     },[])
 
+    const viewWidth = () =>{ setCheckWindow(window.innerWidth) }
     const videoBack = () => { foundVideo.key ? setBackVideo(true) : setBackVideo(false) }
 
     setTimeout(videoBack, 7000)
+    setInterval(viewWidth, 1000)
 
     return(
         <>
@@ -166,10 +169,10 @@ export default function Film(){
         <Box 
         className='body' 
         width={'100vw'} 
-        height={ backVideo && width > 1200 ? '70vh' : '85vh' } 
-        sx={{backgroundImage: backVideo && width > 1200 ? 'none' :
-                              width > 450 && height > 450 ? `url(${back})` : 
-                              width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
+        height={ backVideo && checkWindow > 1200 ? '70vh' : '85vh' } 
+        sx={{backgroundImage: backVideo && checkWindow > 1200 ? 'none' :
+                              checkWindow > 450 && height > 450 ? `url(${back})` : 
+                              checkWindow > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {open ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
@@ -183,7 +186,7 @@ export default function Film(){
                     <h1>{dataMovie0.title}</h1> : 
                     <h3>{dataMovie0.title}</h3>
                     }
-                    { backVideo && width > 1200 ? '' : <p>{dataMovie0.overview}</p> }  
+                    { backVideo && checkWindow > 1200 ? '' : <p>{dataMovie0.overview}</p> }  
                   </div>
                 : ''}
 
@@ -200,10 +203,10 @@ export default function Film(){
                   </div>
               </Grid>
 
-                <Grid className='left' style={{ display: backVideo && width > 1200 ? 'block' : width < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
-                  {foundVideo.key && backVideo && width > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
+                <Grid className='left' style={{ display: backVideo && checkWindow > 1200 ? 'block' : checkWindow < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
+                  {foundVideo.key && backVideo && checkWindow > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
                     allowFullScreen="allowFullScreen"
-                    title='Filme' width='100%' height={width < 450 ? '50%' : '100%'} /> : ''}
+                    title='Filme' width='100%' height={checkWindow < 450 ? '50%' : '100%'} /> : ''}
                 </Grid>
 
             </Grid>

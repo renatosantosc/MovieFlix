@@ -28,6 +28,7 @@ export default function Serie(){
     const [idVideo, setIdVideo] = useState(null) // key do video (trailer)
     const [foundVideo, setFoundVideo] = useState({}) // Array de trailers
     const [backVideo, setBackVideo] = useState(false)
+    const [checkWindow, setCheckWindow] = useState()
     const width = window.innerWidth
     const height = window.screen.height
 
@@ -157,19 +158,21 @@ export default function Serie(){
         });
     },[])
 
+    const viewWidth = () =>{ setCheckWindow(window.innerWidth) }
+
     const videoBack = () => { foundVideo.key ? setBackVideo(true) : setBackVideo(false) }
     setTimeout(videoBack, 7000)
-
+    setInterval(viewWidth, 1000)
     return(
         <>
         {trendingTV && actionTV && animationTV && crimeTV && fantasyTV ? 
         <Box 
         className='body' 
         width={'100vw'} 
-        height={ backVideo && width > 1200 ? '70vh' : '85vh' } 
-        sx={{backgroundImage: backVideo && width > 1200 ? 'none' :
-                              width > 450 && height > 450 ? `url(${back})` : 
-                              width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
+        height={ backVideo && checkWindow > 1200 ? '70vh' : '85vh' } 
+        sx={{backgroundImage: backVideo && checkWindow > 1200 ? 'none' :
+                              checkWindow > 450 && height > 450 ? `url(${back})` : 
+                              checkWindow > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {open ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
@@ -183,11 +186,11 @@ export default function Serie(){
                     <h1>{dataMovie0.name}</h1> :
                     <h3>{dataMovie0.name}</h3>
                     }
-                    {backVideo && width > 1200 ? '' : <p>{dataMovie0.overview}</p>} 
+                    {backVideo && checkWindow > 1200 ? '' : <p>{dataMovie0.overview}</p>} 
                   </div>
                 : ''}
 
-                  <div className='button_footer' style={{ width: backVideo ? '20vw' : '100%' }}>
+                  <div className='button_footer'>
                       <Link to={`/tv/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                             Detalhes
@@ -200,10 +203,10 @@ export default function Serie(){
                   </div>
               </Grid>
 
-                <Grid className='left'  style={{ display: backVideo && width > 1200 ? 'block' : width < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
-                  {foundVideo.key && backVideo && width > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
+                <Grid className='left'  style={{ display: backVideo && checkWindow > 1200 ? 'block' : checkWindow < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
+                  {foundVideo.key && backVideo && checkWindow > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
                     allowFullScreen="allowFullScreen"
-                    title='Filme' width='100%' height={width < 450 ? '50%' : '100%'} /> : ''}
+                    title='Filme' width='100%' height={checkWindow < 450 ? '50%' : '100%'} /> : ''}
                 </Grid>
 
             </Grid>
