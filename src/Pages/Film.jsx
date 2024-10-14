@@ -26,6 +26,7 @@ export default function Film(){
     const [length, setLength] = useState(0) // State para verificar o tamanho do state videoURL
     const [idVideo, setIdVideo] = useState(null) // key do trailer
     const [foundVideo, setFoundVideo] = useState({}) // State do video encontrado como trailer
+    const [backVideo, setBackVideo] = useState(false)
     const width = window.innerWidth
     const height = window.screen.height
 
@@ -155,19 +156,25 @@ export default function Film(){
         });
     },[])
 
+    const videoBack = () => { foundVideo.key ? setBackVideo(true) : setBackVideo(false) }
+
+    setTimeout(videoBack, 7000)
+
     return(
         <>
+        {nowPlaying && actionMovie && romanceMovie && terrorMovie && fictionMovie ?
         <Box 
         className='body' 
         width={'100vw'} 
-        height={'85vh'} 
-        sx={{backgroundImage: width > 450 && height > 450 ? `url(${back})` : 
+        height={ backVideo && width > 1200 ? '70vh' : '85vh' } 
+        sx={{backgroundImage: backVideo && width > 1200 ? 'none' :
+                              width > 450 && height > 450 ? `url(${back})` : 
                               width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {open ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
-            {nowPlaying && actionMovie && romanceMovie && terrorMovie && fictionMovie ? 
+ 
             <Grid className='title'>
               <Grid className='right'>
                 {nowPlaying ?
@@ -176,22 +183,16 @@ export default function Film(){
                     <h1>{dataMovie0.title}</h1> : 
                     <h3>{dataMovie0.title}</h3>
                     }
-                    <p>{dataMovie0.overview}</p>   
+                    { backVideo && width > 1200 ? '' : <p>{dataMovie0.overview}</p> }  
                   </div>
                 : ''}
 
                   <div className='button_footer'>
-                    {videoURL && length > 0 ?
-                        <Button variant='outlined' onClick={handleOpen} startIcon={ <PlayArrowIcon /> }>
-                            Trailer
-                        </Button>
-                    : 
                         <Link to={`/movie/${dataMovie0.id}`} className='link'>
                           <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                               Detalhes
                           </Button>
                         </Link>
-                      }
 
                     <Button variant='contained' startIcon={ <AddIcon /> } >
                       Minha Lista
@@ -199,20 +200,23 @@ export default function Film(){
                   </div>
               </Grid>
 
-                <Grid className='left' sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
-                  
+                <Grid className='left' style={{ display: backVideo && width > 1200 ? 'block' : width < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
+                  {foundVideo.key && backVideo && width > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
+                    allowFullScreen="allowFullScreen"
+                    title='Filme' width='100%' height={width < 450 ? '50%' : '100%'} /> : ''}
                 </Grid>
 
             </Grid>
-            : <Box width='100vw' height='100vh' sx={{
-                backgroundColor: 'transparent',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <CircularProgress sx={{color: 'red'}} />
-              </Box> }
         </Box>
+        : 
+        <Box width='100vw' height='100vh' sx={{
+          backgroundColor: 'transparent',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <CircularProgress sx={{color: 'red'}} />
+        </Box> }
         {nowPlaying ? 
           <Slider movies={nowPlaying} title='Lançamentos' category={'movie'} />
         : '' }

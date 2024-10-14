@@ -27,6 +27,7 @@ export default function Serie(){
     const [length, setLength] = useState(0) // Olhar o tamanho do state videoURL
     const [idVideo, setIdVideo] = useState(null) // key do video (trailer)
     const [foundVideo, setFoundVideo] = useState({}) // Array de trailers
+    const [backVideo, setBackVideo] = useState(false)
     const width = window.innerWidth
     const height = window.screen.height
 
@@ -156,20 +157,24 @@ export default function Serie(){
         });
     },[])
 
+    const videoBack = () => { foundVideo.key ? setBackVideo(true) : setBackVideo(false) }
+    setTimeout(videoBack, 7000)
 
     return(
         <>
+        {trendingTV && actionTV && animationTV && crimeTV && fantasyTV ? 
         <Box 
         className='body' 
         width={'100vw'} 
-        height={'85vh'} 
-        sx={{backgroundImage: width > 450 && height > 450 ? `url(${back})` : 
+        height={ backVideo && width > 1200 ? '70vh' : '85vh' } 
+        sx={{backgroundImage: backVideo && width > 1200 ? 'none' :
+                              width > 450 && height > 450 ? `url(${back})` : 
                               width > 450 && height < 450 ? 'none' : `url(${alt})`}}>
             <Header />
             {open ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' }
-            {trendingTV && actionTV && animationTV && crimeTV && fantasyTV ? 
+            
             <Grid className='title'>
               <Grid className='right'>
                 {trendingTV ?
@@ -178,22 +183,16 @@ export default function Serie(){
                     <h1>{dataMovie0.name}</h1> :
                     <h3>{dataMovie0.name}</h3>
                     }
-                    <p>{dataMovie0.overview}</p>   
+                    {backVideo && width > 1200 ? '' : <p>{dataMovie0.overview}</p>} 
                   </div>
                 : ''}
 
-                  <div className='button_footer'>
-                    {videoURL && length > 0 ?
-                        <Button variant='outlined' onClick={handleOpen} startIcon={ <PlayArrowIcon /> }>
-                          Trailer
-                        </Button>
-                      : 
+                  <div className='button_footer' style={{ width: backVideo ? '20vw' : '100%' }}>
                       <Link to={`/tv/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                             Detalhes
                         </Button>
                       </Link>
-                    }
 
                     <Button variant='contained' startIcon={ <AddIcon /> } >
                       Minha Lista
@@ -201,20 +200,23 @@ export default function Serie(){
                   </div>
               </Grid>
 
-                <Grid className='left' sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
-                  
+                <Grid className='left'  style={{ display: backVideo && width > 1200 ? 'block' : width < 450 ? 'flex' : 'none' }} sx={{backgroundImage: height < 450 ? `url(${back})` : 'none'}}>
+                  {foundVideo.key && backVideo && width > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
+                    allowFullScreen="allowFullScreen"
+                    title='Filme' width='100%' height={width < 450 ? '50%' : '100%'} /> : ''}
                 </Grid>
 
             </Grid>
-            : <Box width='100vw' height='100vh' sx={{
-                backgroundColor: 'transparent',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <CircularProgress sx={{color: 'red'}} />
-              </Box> }
         </Box>
+        : 
+          <Box width='100vw' height='100vh' sx={{
+            backgroundColor: 'transparent',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <CircularProgress sx={{color: 'red'}} />
+          </Box> }
         {trendingTV ? 
           <Slider movies={trendingTV} title='Tendências da semana' category={'tv'} />
         : '' }
