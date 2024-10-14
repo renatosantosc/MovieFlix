@@ -21,7 +21,6 @@
 .body .title .right{
     display: grid;
     grid-template-rows: 80% auto;
-    justify-content: center;
     align-items: center;
     height: 100%;
     animation-name: up;
