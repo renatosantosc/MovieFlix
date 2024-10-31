@@ -12,19 +12,30 @@
     height: 100%;
     padding: 0 0 0 20px;
     display: grid;
-    grid-template-columns: 30% 70%;
+    /* grid-template-columns: 30% 70%; */
     justify-content: space-between;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.270);
     box-shadow: 10px 10px 30px rgb(0, 0, 0);
 }
-.body .title .right{
+.body .title .right, .body .title .right-next{
     display: grid;
-    grid-template-rows: 80% auto;
+    grid-template-rows: 70% auto;
     align-items: center;
     height: 100%;
     animation-name: up;
     animation-duration: 2s;
+}
+
+.body .title .right-next{
+    position: relative;
+    left: 15%;
+    width: 500px;
+    z-index: 100;
+    text-shadow: 5px 5px 10px #252525;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(90deg, black, rgba(0, 0, 0, 0.247));
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.247);
 }
 @keyframes up{
     0%{
@@ -34,41 +45,43 @@
         transform: scale(1);
     }
 }
-.body .title .right .description{
+.body .title .right .description, .body .title .right-next .description{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-.body .title .right .description h1{
+.body .title .right .description h1, .body .title .right-next .description h1{
     text-align: center;
     margin-top: 17%;
     width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3.2rem;
 }
-.body .title .right .button_footer{
+.body .title .right .button_footer, .body .title .right-next .button_footer{
     display: flex;
     align-items: flex-start;
     justify-content: center;
     height: 100%;
     width: 100%;
 }
-.body .title .right .description p{
+.body .title .right .description p, .body .title .right-next .description p{
     font-size: 0.8rem;
     font-family: 'Roboto', sans-serif;
     width: 80%;
     letter-spacing: 1.1px;
     word-spacing: 0.9px;
 }
-.body .title .right .description h1{
+/* .body .title .right .description h1{
     font-family: 'Roboto', sans-serif;
     font-size: 3.2rem;
-}
-.body .title .right .button_footer .link{
+} */
+.body .title .right .button_footer .link, .body .title .right-next .button_footer .link{
     width: 100%;
     text-decoration: none;
 }
-.body .title .right .button_footer .link .MuiButton-outlined{
+.body .title .right .button_footer .link .MuiButton-outlined, .body .title .right-next .button_footer .link .MuiButton-outlined{
     background-color: #fff;
     color: #252525;
     border-color: #fff;
@@ -76,18 +89,23 @@
     z-index: 0;
     margin-left: 5%;
 }
-.body .title .right .button_footer .MuiButton-outlined{
+.body .title .right .button_footer .MuiButton-outlined, .body .title .right-next .button_footer .MuiButton-outlined{
     background-color: #fff;
     color: #252525;
     border-color: #fff;
     width: 35%;
     z-index: 0;
 }
-.body .title .right .button_footer .MuiButton-outlined:hover, .body .title .left .MuiButton-contained:hover, .body .title .right .button_footer .link .MuiButton-outlined:hover{
+.body .title .right .button_footer .MuiButton-outlined:hover, 
+.body .title .left .MuiButton-contained:hover, 
+.body .title .right .button_footer .link .MuiButton-outlined:hover,
+.body .title .right-next .button_footer .MuiButton-outlined:hover,
+.body .title .right-next .button_footer .link .MuiButton-outlined:hover
+{
     background-color: rgb(202, 202, 202);
     border-color: rgb(202, 202, 202);
 }
-.body .title .right .button_footer .MuiButton-contained{
+.body .title .right .button_footer .MuiButton-contained, .body .title .right-next .button_footer .MuiButton-contained{
     background-color: rgb(143, 142, 142);
     color: #fff;
     border-color: rgb(143, 142, 142);
