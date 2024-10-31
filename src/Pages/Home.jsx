@@ -24,7 +24,8 @@ export default function Home(){
   const [videoURL, setVideoURL] = useState() // State de todos os videos relacionado ao filme do background
   const [length, setLength] = useState(0) // State para verificar o tamanho da state videoURL
   const [idVideo, setIdVideo] = useState(null) // key do video do trailer
-  const [foundVideo, setFoundVideo] = useState({}) // State dos videos encontrados como trailer
+  const [foundVideo, setFoundVideo] = useState({}) // State dos videos encontrados como trailer dublado
+  const [foundVideo2, setFoundVideo2] = useState({}) // State dos videos encontrados como trailer disponível
   const [backVideo, setBackVideo] = useState(false)
   const [checkWindow, setCheckWindow] = useState()
   const width = window.innerWidth
@@ -66,7 +67,8 @@ export default function Home(){
         .then(function (response) {
           setVideoURL(response.data.results)
           setLength(response.data.results.length)
-          setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.type === 'Trailer'))
+          setFoundVideo(response.data.results.find((item) => item.name === 'Trailer Oficial Dublado' || item.name === 'Teaser Trailer Dublado' || item.name === 'Trailer Final Dublado'))
+          setFoundVideo2(response.data.results.find((item) => item.type === 'Trailer'))
         })
         .catch(function (error) {
           console.error(error);
@@ -101,7 +103,7 @@ export default function Home(){
   },[])
 
   const viewWidth = () =>{ setCheckWindow(window.innerWidth) }
-  const videoBack = () => { foundVideo.key ? setBackVideo(true) : setBackVideo(false) }
+  const videoBack = () => { foundVideo && foundVideo.key || foundVideo2 && foundVideo2.key ? setBackVideo(true) : setBackVideo(false) }
 
   setTimeout(videoBack, 7000)
   setInterval(viewWidth, 1000)
@@ -109,29 +111,57 @@ export default function Home(){
 
     return(
       <>
-      {dataMovie && discover && videoURL && foundVideo && back ?
+      {dataMovie && discover && videoURL && back ?
         <Box className='body' 
             width={'100vw'} 
-            height={ backVideo && checkWindow > 1200 ? '70vh' : '85vh'} 
+            height={ backVideo && checkWindow > 1200 ? '90vh' : '85vh'} 
             sx={{backgroundImage: backVideo && checkWindow > 1200 ? 'none' :
                                   checkWindow > 450 && height > 450 ? `url(${back})` : 
                                   checkWindow > 450 && height < 500 ? 'none' : `url(${alt})`}}>
             <Header />
-            {videoURL ? 
+            {/* {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
-            : '' }
-            <Grid container className='title'>
+            : '' } */}
+            <Grid container className='title' sx={{ gridTemplateColumns: backVideo ? '0% 100%' : '30% 70%' }}>
+
+              {backVideo ?
+              <Grid item className='right-next'>
+                {dataMovie && backVideo ?
+                    <div className='description'>
+                      {height > 450 ? 
+                      <h1>{dataMovie0.title}</h1> :
+                      <h3>{dataMovie0.title}</h3>
+                      }
+                      {backVideo ? '' : <p>{dataMovie0.overview}</p> } 
+                    </div>
+                    : ''
+                  }
+                    {backVideo ?
+                    <div className='button_footer'>
+                        <Link to={`/movie/${dataMovie0.id}`} className='link'>
+                          <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
+                              Detalhes
+                          </Button>
+                        </Link>
+
+                      <Button variant='contained' startIcon={ <AddIcon /> }>
+                        Minha Lista
+                      </Button>
+                    </div> : ''
+                    }
+              </Grid>
+                :
               <Grid item className='right'>
-                {dataMovie ?
+                {dataMovie && backVideo ? '' :
                   <div className='description'>
                     {height > 450 ? 
                     <h1>{dataMovie0.title}</h1> :
                     <h3>{dataMovie0.title}</h3>
                     }
-                    {backVideo && checkWindow > 1200 ? '' : <p>{dataMovie0.overview}</p> } 
+                    {backVideo ? '' : <p>{dataMovie0.overview}</p> } 
                   </div>
-                : ''}
-
+                }
+                  {backVideo ? '' :
                   <div className='button_footer'>
                       <Link to={`/movie/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
@@ -143,12 +173,17 @@ export default function Home(){
                       Minha Lista
                     </Button>
                   </div>
+                  }
               </Grid>
+              }
 
                 <Grid item className='left' style={{ display: backVideo && checkWindow > 1200 ? 'block' : checkWindow < 450 ? 'flex' : height < 500 ? 'flex' : 'none' }} sx={{backgroundImage: height < 500 ? `url(${back})` : 'none'}}>
-                  {foundVideo.key && backVideo && checkWindow > 1200 ? <iframe frameborder='0' src={`https://www.youtube.com/embed/${foundVideo.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo.key}&loop=1`}
-                  allowFullScreen="allowFullScreen"
-                  title='Filme' width='100%' height={checkWindow < 450 ? '50%' : '100%'} /> : ''}
+                  {foundVideo && foundVideo.key && backVideo && checkWindow > 1200 || foundVideo2 && foundVideo2.key && backVideo && checkWindow > 1200 ? 
+                  <iframe 
+                    frameborder='0' 
+                    src={`https://www.youtube.com/embed/${foundVideo ? foundVideo.key : foundVideo2.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo ? foundVideo.key : foundVideo2.key}&loop=1`}
+                    allowFullScreen="allowFullScreen"
+                    title='Filme' width='100%' height={checkWindow < 450 ? '50%' : '100%'} /> : ''}
                 </Grid>
 
             </Grid>
@@ -163,15 +198,15 @@ export default function Home(){
         }}>
           <CircularProgress sx={{color: 'red'}} />
         </Box> }
-        {dataMovie && videoURL && foundVideo && back ? 
+        {dataMovie && videoURL && back ? 
           <Slider movies={dataMovie} title='Filmes em alta' category={'movie'} />
         : '' }
 
-        {discover && videoURL && foundVideo && back ? 
+        {discover && videoURL && back ? 
           <Slider movies={discover} title='Séries em alta' category={'tv'} />
         : '' }
         
-        {dataMovie && discover && videoURL && foundVideo && back ? <Footer /> : ''} 
+        {dataMovie && discover && videoURL && back ? <Footer /> : ''} 
         
       </>    
     )
