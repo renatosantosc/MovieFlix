@@ -114,19 +114,19 @@ export default function Home(){
       {dataMovie && discover && videoURL && back ?
         <Box className='body' 
             width={'100vw'} 
-            height={ backVideo && checkWindow > 1200 ? '90vh' : '85vh'} 
-            sx={{backgroundImage: backVideo && checkWindow > 1200 ? 'none' :
+            height={ backVideo && checkWindow >= 1500 ? '90vh' : backVideo && checkWindow < 1500 && checkWindow > 1100 ? '70vh' : '85vh'} 
+            sx={{backgroundImage: backVideo && checkWindow > 1100 ? 'none' :
                                   checkWindow > 450 && height > 450 ? `url(${back})` : 
                                   checkWindow > 450 && height < 500 ? 'none' : `url(${alt})`}}>
             <Header />
             {/* {videoURL ? 
               <Modal setOpen={setOpen} open={open} id={foundVideo.key} />
             : '' } */}
-            <Grid container className='title' sx={{ gridTemplateColumns: backVideo ? '0% 100%' : '30% 70%' }}>
+            <Grid container className='title' sx={{ gridTemplateColumns: backVideo && checkWindow > 1100 ? '0% 100%' : '30% 70%' }}>
 
-              {backVideo ?
+              {backVideo && checkWindow > 1100 ?
               <Grid item className='right-next'>
-                {dataMovie && backVideo ?
+                {dataMovie && backVideo && checkWindow > 1100 ?
                     <div className='description'>
                       {height > 450 ? 
                       <h1>{dataMovie0.title}</h1> :
@@ -136,40 +136,38 @@ export default function Home(){
                     </div>
                     : ''
                   }
-                    {backVideo ?
-                    <div className='button_footer'>
+                    <div className='button_footer' style={{ display: 'flex', flexDirection: checkWindow > 600 && checkWindow < 1100 ? 'column' : 'row' }}>
                         <Link to={`/movie/${dataMovie0.id}`} className='link'>
                           <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                               Detalhes
                           </Button>
                         </Link>
 
-                      <Button variant='contained' startIcon={ <AddIcon /> }>
+                      <Button variant='contained' startIcon={ <AddIcon /> } sx={{ margin: checkWindow > 600 && checkWindow < 1100 ? '5%' : 0 }}>
                         Minha Lista
                       </Button>
-                    </div> : ''
-                    }
+                    </div>
               </Grid>
                 :
               <Grid item className='right'>
-                {dataMovie && backVideo ? '' :
+                {dataMovie && backVideo && checkWindow > 1100 ? '' :
                   <div className='description'>
                     {height > 450 ? 
                     <h1>{dataMovie0.title}</h1> :
                     <h3>{dataMovie0.title}</h3>
                     }
-                    {backVideo ? '' : <p>{dataMovie0.overview}</p> } 
+                    {backVideo && checkWindow > 1100 ? '' : <p>{dataMovie0.overview}</p> } 
                   </div>
                 }
-                  {backVideo ? '' :
-                  <div className='button_footer'>
+                  {backVideo && checkWindow > 1100 ? '' :
+                  <div className='button_footer' style={{ display: 'flex', flexDirection: checkWindow > 600 && checkWindow < 1100 ? 'column' : 'row' }}>
                       <Link to={`/movie/${dataMovie0.id}`} className='link'>
                         <Button variant='outlined' startIcon={ <InfoIcon sx={{paddingBottom: '3px'}} /> }>
                             Detalhes
                         </Button>
                       </Link>
 
-                    <Button variant='contained' startIcon={ <AddIcon /> }>
+                    <Button variant='contained' startIcon={ <AddIcon /> } sx={{ margin: checkWindow > 600 && checkWindow < 1100 ? '5%' : 0 }}>
                       Minha Lista
                     </Button>
                   </div>
@@ -177,8 +175,8 @@ export default function Home(){
               </Grid>
               }
 
-                <Grid item className='left' style={{ display: backVideo && checkWindow > 1200 ? 'block' : checkWindow < 450 ? 'flex' : height < 500 ? 'flex' : 'none' }} sx={{backgroundImage: height < 500 ? `url(${back})` : 'none'}}>
-                  {foundVideo && foundVideo.key && backVideo && checkWindow > 1200 || foundVideo2 && foundVideo2.key && backVideo && checkWindow > 1200 ? 
+                <Grid item className='left' style={{ display: backVideo && checkWindow > 1100 ? 'block' : checkWindow < 450 ? 'flex' : height < 500 ? 'flex' : 'none' }} sx={{backgroundImage: height < 500 ? `url(${back})` : 'none'}}>
+                  {foundVideo && foundVideo.key && backVideo && checkWindow > 1100 || foundVideo2 && foundVideo2.key && backVideo && checkWindow > 1100 ? 
                   <iframe 
                     frameborder='0' 
                     src={`https://www.youtube.com/embed/${foundVideo ? foundVideo.key : foundVideo2.key}?autoplay=1&controls=0&showinfo=0&autohide=0&playlist=${foundVideo ? foundVideo.key : foundVideo2.key}&loop=1`}
