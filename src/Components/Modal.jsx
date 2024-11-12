@@ -28,10 +28,16 @@ export default function Modal_Video(props){
                 title='Filme' width='80%' height={width < 450 ? '50%' : '95%'} />
                 <Button variant='text' onClick={handleClose}
                 sx={{
-                    color: '#fff',
-                    marginTop: '1%'
+                    color: '#232323',
+                    marginTop: '1%',
+                    backgroundColor: '#fff',
+                    width: width > 470 ? '15%' : '50%',
+                    '&:hover':{
+                        backgroundColor: '#232323',
+                        color: '#fff'
+                    }
                 }}>
-                    Fechar
+                    Fechar trailer
                 </Button>
                 </Box>
             </Modal>
